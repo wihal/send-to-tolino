@@ -6,9 +6,7 @@ import time
 
 try:
     load_dotenv()
-
     username = os.environ.get('user')
-
     password = os.environ.get('password')
 
 except:
@@ -24,35 +22,30 @@ def main(file_path: str = None):
     file_extension = os.path.splitext(file_path)[1].lower()
     
     client = Client()
-    
     client.login(username, password)
-    
     client.register()
-    
-
     client.upload(file_path, extension=file_extension)
-
     client.unregister()
     client.logout()
 
     print("Done!")
     
 def remove_quotes(string):
-    if len(string) > 1 and (string[0] == '"' or string[0] == "'") and (string[-1] == '"' or string[-1] == "'"):
-        return string[1:-1]
-    else:
-        return string
+    input_string = string
+    try:
+        if len(string) > 1 and (string[0] == '"' or string[0] == "'") and (string[-1] == '"' or string[-1] == "'"):
+            return string[1:-1]
+        else:
+            return string
+    except:
+        return input_string
     
 if __name__ == "__main__":
     try: 
         file_path = sys.argv[1] 
     except:
         file_path = input("Enter file path: ")
-        
-    try:
-        file_path =remove_quotes(file_path)
-    except:
-        file_path = file_path
-        pass
+
+    file_path = remove_quotes(file_path)
     
     main(file_path)
