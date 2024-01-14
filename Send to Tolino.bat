@@ -1,0 +1,1 @@
+python "C:\Users\willi\Desktop\send-to-tolino\main.py" %*
